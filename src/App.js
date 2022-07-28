@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import LowTasks from "./Components/LowTasks";
+import HighTasks from "./Components/HighTasks";
+import {taskList} from "./State";
 
-function App() {
+const App = () => {
+   let highList = [];
+   let lowList = [];
+   taskList.map(task => {
+       if (task.priority === 'high') {
+           highList.push(task);
+       } else if (task.priority === 'low') {
+           lowList.push(task);
+       }
+   })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HighTasks highList={highList} />
+      <LowTasks lowList={lowList} />
     </div>
   );
 }
