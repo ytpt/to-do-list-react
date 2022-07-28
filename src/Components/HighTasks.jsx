@@ -5,7 +5,7 @@ import Btn from "../img/close-icon.png";
 const HighTasks = ({highList}) => {
 
     const listItems = highList.map((task) =>
-        <li>
+        <li key={task.id}>
             <input type={"radio"} />
             <p>{task.name}</p>
             <button className={s.cross}><img src={Btn}/></button>
