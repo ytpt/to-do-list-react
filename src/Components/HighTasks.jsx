@@ -13,7 +13,7 @@ const HighTasks = ({highList}) => {
     const [important, setImportant] = useState('high');
 
     const listItems = highList.map((task) =>
-        <Task task={task} />
+        <Task key={task.id} task={task} />
     );
 
     const handleKeyPress = (event) => {

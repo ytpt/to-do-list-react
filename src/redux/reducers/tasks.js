@@ -1,6 +1,6 @@
 const ADD_TASK = 'ADD_TASK';
 const DELETE_TASK = 'DELETE_TASK';
-// const DO_DONE = 'DO_DONE';
+const DONE_TASK = 'DO_DONE';
 
 const initialState = {
     tasks: [
@@ -36,19 +36,19 @@ export default (state = initialState, action) => {
             }
         }
 
-        // case DO_DONE: {
-        //     return {
-        //         ...state,
-        //         tasks: state.tasks.map((task) => {
-        //             if (task.id === action.id) {
-        //                 return {...task, isDone: !task.isDone}
-        //             }
-        //
-        //         return task
-        //
-        //         })
-        //     }
-        // }
+        case DONE_TASK: {
+            return {
+                ...state,
+                tasks: state.tasks.map((task) => {
+                    if (task.id === action.id) {
+                        return {...task, isDone: !task.isDone}
+                    }
+
+                return task
+
+                })
+            }
+        }
 
         default: return state;
     }
@@ -62,6 +62,6 @@ export const deleteTask = (taskId) => {
     return (dispatch) => dispatch({type:DELETE_TASK, taskId})
 }
 
-// export const doDone = (taskId) => {
-//     return (dispatch) => dispatch({type:DO_DONE, taskId})
-// }
+export const doneTaskAC = (taskId) => {
+    return (dispatch) => dispatch({type:DONE_TASK, taskId})
+}
