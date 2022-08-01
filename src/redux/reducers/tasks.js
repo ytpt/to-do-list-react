@@ -40,13 +40,9 @@ export default (state = initialState, action) => {
 }
 
 export const addTaskAC = (name) => {
-    return (dispatch) => {
-        return dispatch({type: ADD_TASK, name})
-    }
+    return (dispatch) => dispatch({type: ADD_TASK, name})
 }
 
 export const deleteTask = (taskId) => {
-    return (dispatch) => {
-        return dispatch({type:DELETE_TASK, taskId})
-    }
+    return (dispatch) => dispatch({type:DELETE_TASK, taskId})
 }
