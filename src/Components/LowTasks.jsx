@@ -8,16 +8,7 @@ const LowTasks = ({lowList}) => {
 
     const dispatch = useDispatch();
     const [task, setTask] = useState();
-    const [done, setDone] = useState(false);
     const [important, setImportant] = useState('low');
-
-    // function handleClick(event) {
-    //     if (event.target.value === done) {
-    //         setDone("");
-    //     } else {
-    //         setDone(event.target.value);
-    //     }
-    // }
 
     const listItems = lowList.map((task) =>
         <li key={task.id}>
@@ -32,11 +23,21 @@ const LowTasks = ({lowList}) => {
         </li>
     );
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            {task && dispatch(addTaskAC(task, important))}
+            setTask('');
+        }
+    }
+
     return (
         <div className={s.container}>
             <h2>Low</h2>
             <div className={s.addLowTask}>
-                <input type={"text"} value={task}
+                <input
+                    type={"text"}
+                    value={task}
+                    onKeyPress={handleKeyPress}
                     onChange={(e) => setTask(e.target.value)} />
                 <button type={'button'} disabled={!task}
                     onClick={ () => {dispatch(addTaskAC(task, important));

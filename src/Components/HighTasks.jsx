@@ -13,24 +13,43 @@ const HighTasks = ({highList}) => {
     const listItems = highList.map((task) =>
         <li key={task.id}>
             {task.isDone
-                ? <input type={"radio"} value={task.id} checked/>
-                : <input type={"radio"} value={task}/> }
+                ? <input
+                    type={"radio"}
+                    value={task.id}
+                    checked/>
+                : <input
+                    type={"radio"}
+                    value={task}/> }
             <p>{task.name}</p>
-            <button className={s.cross} type={'button'}
+            <button
+                className={s.cross}
+                type={'button'}
                 onClick={() => dispatch(deleteTask(task.id))}>
                     <img src={Btn}/>
             </button>
         </li>
     );
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            {task && dispatch(addTaskAC(task, important))}
+            setTask('');
+        }
+    }
+
     return (
         <div className={s.container}>
             <h2>High</h2>
             <div className={s.addHighTask}>
-                <input type={"text"} value={task}
+                <input
+                    type={"text"}
+                    value={task}
+                    onKeyPress={handleKeyPress}
                     onChange={(e) => setTask(e.target.value)} />
-                <button type={'button'} disabled={!task}
-                        onClick={ () => {dispatch(addTaskAC(task, important));
+                <button
+                    type={'button'}
+                    disabled={!task}
+                    onClick={ () => {dispatch(addTaskAC(task, important));
                     setTask('')}}>
                         <img src={Btn} />
                 </button>
