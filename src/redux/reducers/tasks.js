@@ -1,4 +1,5 @@
 const ADD_TASK = 'ADD_TASK';
+const DELETE_TASK = 'DELETE_TASK';
 
 const initialState = {
     tasks: [
@@ -25,6 +26,15 @@ export default (state = initialState, action) => {
                 count: state.count + 1
             }
         }
+
+        case DELETE_TASK: {
+            return {
+                ...state,
+                tasks: state.tasks.filter((task) => task.id !== action.taskId),
+                count: state.count - 1
+            }
+        }
+
         default: return state;
     }
 }
@@ -32,5 +42,11 @@ export default (state = initialState, action) => {
 export const addTaskAC = (name) => {
     return (dispatch) => {
         return dispatch({type: ADD_TASK, name})
+    }
+}
+
+export const deleteTask = (taskId) => {
+    return (dispatch) => {
+        return dispatch({type:DELETE_TASK, taskId})
     }
 }

@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import s from './tasks.module.css';
 import Btn from "../img/close-icon.png";
-import {addTaskAC} from "../redux/reducers/tasks";
+import {addTaskAC, deleteTask} from "../redux/reducers/tasks";
 import {useDispatch} from "react-redux";
 
 const LowTasks = ({lowList}) => {
+
+    const dispatch = useDispatch();
+    const [task, setTask] = useState();
 
     const listItems = lowList.map((task) =>
         <li key={task.id}>
@@ -13,18 +16,11 @@ const LowTasks = ({lowList}) => {
             <button
                 className={s.cross}
                 type={'button'}
-                onClick={() => {
-                    dispatch(addTaskAC(task))
-                    setTask('')
-                }}>
-                <img src={Btn}/>
+                onClick={() => dispatch(deleteTask(task.id))}>
+                        <img src={Btn}/>
             </button>
         </li>
     );
-
-    const dispatch = useDispatch();
-
-    const [task, setTask] = useState();
 
     return (
         <div className={s.container}>
@@ -34,8 +30,10 @@ const LowTasks = ({lowList}) => {
                     type={"text"}
                     onChange={(e) => setTask(e.target.value)}
                     value={task} />
-                <button type={'button'}>
-                    <img src={Btn}/>
+                <button type={'button'} onClick={
+                    () => {dispatch(addTaskAC(task));
+                    setTask('')}}>
+                        <img src={Btn}/>
                 </button>
             </div>
             <ul>{listItems}</ul>
