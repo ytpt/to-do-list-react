@@ -3,6 +3,9 @@ import s from './tasks.module.css'
 import Btn from "../img/close-icon.png";
 import {addTaskAC, deleteTask} from "../redux/reducers/tasks";
 import {useDispatch} from "react-redux";
+import Task from "./Task";
+import Input from "./Input";
+import Button from "./Button";
 
 const HighTasks = ({highList}) => {
 
@@ -11,29 +14,12 @@ const HighTasks = ({highList}) => {
     const [important, setImportant] = useState('high');
 
     const listItems = highList.map((task) =>
-        <li key={task.id}>
-            {task.isDone
-                ? <input
-                    type={"radio"}
-                    value={task.id}
-                    checked/>
-                : <input
-                    type={"radio"}
-                    value={task}/> }
-            <p>{task.name}</p>
-            <button
-                className={s.cross}
-                type={'button'}
-                onClick={() => dispatch(deleteTask(task.id))}>
-                    <img src={Btn}/>
-            </button>
-        </li>
+        <Task task={task} />
     );
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            {task && dispatch(addTaskAC(task, important))}
-            setTask('');
+            {task && dispatch(addTaskAC(task, important))} setTask('');
         }
     }
 
@@ -41,18 +27,8 @@ const HighTasks = ({highList}) => {
         <div className={s.container}>
             <h2>High</h2>
             <div className={s.addHighTask}>
-                <input
-                    type={"text"}
-                    value={task}
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setTask(e.target.value)} />
-                <button
-                    type={'button'}
-                    disabled={!task}
-                    onClick={ () => {dispatch(addTaskAC(task, important));
-                    setTask('')}}>
-                        <img src={Btn} />
-                </button>
+                <Input task={task} handleKeyPress={handleKeyPress} setTask={setTask} />
+                <Button task={task} important={important} setTask={setTask} />
             </div>
             <ul>{listItems}</ul>
         </div>

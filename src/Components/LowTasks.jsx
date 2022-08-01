@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import s from './tasks.module.css';
-import Btn from "../img/close-icon.png";
-import {addTaskAC, deleteTask} from "../redux/reducers/tasks";
+import {addTaskAC} from "../redux/reducers/tasks";
 import {useDispatch} from "react-redux";
+import Task from "./Task";
+import Input from "./Input";
+import Button from "./Button";
 
 const LowTasks = ({lowList}) => {
 
@@ -11,22 +13,12 @@ const LowTasks = ({lowList}) => {
     const [important, setImportant] = useState('low');
 
     const listItems = lowList.map((task) =>
-        <li key={task.id}>
-            {task.isDone
-                ? <input type={"radio"} value={task.id} checked />
-                : <input type={"radio"} value={task.id} /> }
-            <p>{task.name}</p>
-            <button className={s.cross} type={'button'}
-                    onClick={() => dispatch(deleteTask(task.id))}>
-                    <img src={Btn}/>
-            </button>
-        </li>
+        <Task task={task} />
     );
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            {task && dispatch(addTaskAC(task, important))}
-            setTask('');
+            {task && dispatch(addTaskAC(task, important))} setTask('');
         }
     }
 
@@ -34,16 +26,8 @@ const LowTasks = ({lowList}) => {
         <div className={s.container}>
             <h2>Low</h2>
             <div className={s.addLowTask}>
-                <input
-                    type={"text"}
-                    value={task}
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setTask(e.target.value)} />
-                <button type={'button'} disabled={!task}
-                    onClick={ () => {dispatch(addTaskAC(task, important));
-                    setTask('')}}>
-                        <img src={Btn}/>
-                </button>
+                <Input task={task} handleKeyPress={handleKeyPress} setTask={setTask} />
+                <Button task={task} important={important} setTask={setTask} />
             </div>
             <ul>{listItems}</ul>
         </div>
