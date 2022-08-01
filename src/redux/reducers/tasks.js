@@ -1,13 +1,14 @@
 const ADD_TASK = 'ADD_TASK';
 const DELETE_TASK = 'DELETE_TASK';
+// const DO_DONE = 'DO_DONE';
 
 const initialState = {
     tasks: [
-        {id: 1, name: 'create a task', completed: false, priority: 'low'},
-        {id: 2, name: 'wash a dish', completed: false, priority: 'high'},
-        {id: 3, name: 'draw a pic', completed: true, priority: 'low'},
-        {id: 4, name: 'make a bed', completed: true, priority: 'high'},
-        {id: 5, name: 'write a post', completed: false, priority: 'low'}
+        {id: 1, name: 'create a task', isDone: false, important: 'low'},
+        {id: 2, name: 'wash a dish', isDone: false, important: 'high'},
+        {id: 3, name: 'draw a pic', isDone: true, important: 'low'},
+        {id: 4, name: 'make a bed', isDone: true, important: 'high'},
+        {id: 5, name: 'write a post', isDone: false, important: 'low'}
     ],
     count: 0
 }
@@ -20,8 +21,8 @@ export default (state = initialState, action) => {
                 tasks: [...state.tasks, {
                     id: Math.floor(Math.random() * 1000),
                     name: action.name,
-                    completed: false,
-                    priority: 'low'
+                    isDone: false,
+                    important: action.important
                 }],
                 count: state.count + 1
             }
@@ -35,14 +36,32 @@ export default (state = initialState, action) => {
             }
         }
 
+        // case DO_DONE: {
+        //     return {
+        //         ...state,
+        //         tasks: state.tasks.map((task) => {
+        //             if (task.id === action.id) {
+        //                 return {...task, isDone: !task.isDone}
+        //             }
+        //
+        //         return task
+        //
+        //         })
+        //     }
+        // }
+
         default: return state;
     }
 }
 
-export const addTaskAC = (name) => {
-    return (dispatch) => dispatch({type: ADD_TASK, name})
+export const addTaskAC = (name, important) => {
+    return (dispatch) => dispatch({type: ADD_TASK, name, important})
 }
 
 export const deleteTask = (taskId) => {
     return (dispatch) => dispatch({type:DELETE_TASK, taskId})
 }
+
+// export const doDone = (taskId) => {
+//     return (dispatch) => dispatch({type:DO_DONE, taskId})
+// }

@@ -6,33 +6,31 @@ import {useDispatch} from "react-redux";
 
 const HighTasks = ({highList}) => {
 
+    const dispatch = useDispatch();
+    const [task, setTask] = useState();
+    const [important, setImportant] = useState('high');
+
     const listItems = highList.map((task) =>
         <li key={task.id}>
-            <input type={"radio"} />
+            {task.isDone
+                ? <input type={"radio"} value={task.id} checked/>
+                : <input type={"radio"} value={task}/> }
             <p>{task.name}</p>
-            <button
-                className={s.cross}
-                type={'button'}
+            <button className={s.cross} type={'button'}
                 onClick={() => dispatch(deleteTask(task.id))}>
                     <img src={Btn}/>
             </button>
         </li>
     );
 
-    const dispatch = useDispatch();
-
-    const [task, setTask] = useState();
-
     return (
         <div className={s.container}>
             <h2>High</h2>
             <div className={s.addHighTask}>
-                <input
-                    type={"text"}
-                    onChange={(e) => setTask(e.target.value)}
-                    value={task}/>
-                <button type={'button'} onClick={ () => {
-                    dispatch(addTaskAC(task));
+                <input type={"text"} value={task}
+                    onChange={(e) => setTask(e.target.value)} />
+                <button type={'button'} disabled={!task}
+                        onClick={ () => {dispatch(addTaskAC(task, important));
                     setTask('')}}>
                         <img src={Btn} />
                 </button>
