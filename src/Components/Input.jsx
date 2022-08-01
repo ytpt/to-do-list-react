@@ -7,7 +7,8 @@ const Input = ({task, handleKeyPress, setTask}) => {
             type={"text"}
             value={task}
             onKeyPress={handleKeyPress}
-            onChange={(e) => setTask(e.target.value)} />
+            onChange={(e) => setTask(e.target.value)}
+        />
     )
 }
 

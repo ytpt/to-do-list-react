@@ -11,8 +11,9 @@ const Button = ({task, important, setTask}) => {
         <button
             type={'button'}
             disabled={!task}
-            onClick={ () => {dispatch(addTaskAC(task, important)); setTask('')}}>
-            <img src={Btn} />
+            onClick={ () => {dispatch(addTaskAC(task, important)); setTask('')}}
+            >
+                <img src={Btn} />
         </button>
     )
 }

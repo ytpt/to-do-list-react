@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import s from './tasks.module.css'
-import Btn from "../img/close-icon.png";
-import {addTaskAC, deleteTask} from "../redux/reducers/tasks";
+import {addTaskAC} from "../redux/reducers/tasks";
 import {useDispatch} from "react-redux";
 import Task from "./Task";
 import Input from "./Input";
