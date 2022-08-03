@@ -59,9 +59,9 @@ export const addTaskAC = (name, important) => {
 }
 
 export const deleteTask = (taskId) => {
-    return (dispatch) => dispatch({type:DELETE_TASK, taskId})
+    return (dispatch) => dispatch({type: DELETE_TASK, taskId})
 }
 
-export const doneTaskAC = (taskId) => {
-    return (dispatch) => dispatch({type:DONE_TASK, taskId})
+export const doneTaskAC = (taskId, isDone) => {
+    return (dispatch) => dispatch({type: DONE_TASK, taskId, isDone})
 }

@@ -1,23 +1,32 @@
+import React, {useEffect, useState} from "react";
 import s from "./tasks.module.css";
-import {deleteTask} from "../redux/reducers/tasks";
+import {deleteTask, doneTaskAC} from "../redux/reducers/tasks";
 import Btn from "../img/close-icon.png";
-import React from "react";
 import {useDispatch} from "react-redux";
 
 const Task = ({task}) => {
 
     const dispatch = useDispatch();
+    const [radio, setRadio] = useState(task.isDone);
+
+    const toggleRadio = () => {
+        if (radio === true) {
+            setRadio(false)
+            dispatch(doneTaskAC(task.id, task.isDone))
+        } else {
+            setRadio(true)
+            dispatch(doneTaskAC(task.id, task.isDone))
+        }
+    }
 
     return (
         <li key={task.id}>
-            {task.isDone
-                ? <input
-                    type={"radio"}
-                    value={task.id}
-                    checked />
-                : <input
-                    type={"radio"}
-                    value={task.id} /> }
+            <input
+                type={'radio'}
+                value={radio}
+                checked={radio}
+                onClick={toggleRadio}
+                onChange={toggleRadio} />
             <p>{task.name}</p>
             <button
                 className={s.cross}
