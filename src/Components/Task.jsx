@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import s from "./tasks.module.css";
-import {deleteTask, doneTaskAC} from "../redux/reducers/tasks";
+import {deleteTaskAC, doneTaskAC} from "../redux/reducers/tasks";
 import Btn from "../img/close-icon.png";
 import {useDispatch} from "react-redux";
 
@@ -31,7 +31,7 @@ const Task = ({task}) => {
             <button
                 className={s.cross}
                 type={'button'}
-                onClick={() => dispatch(deleteTask(task.id))}>
+                onClick={() => dispatch(deleteTaskAC(task.id))}>
                 <img src={Btn}/>
             </button>
         </li>

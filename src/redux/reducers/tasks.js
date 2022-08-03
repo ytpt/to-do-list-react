@@ -58,7 +58,7 @@ export const addTaskAC = (name, important) => {
     return (dispatch) => dispatch({type: ADD_TASK, name, important})
 }
 
-export const deleteTask = (taskId) => {
+export const deleteTaskAC = (taskId) => {
     return (dispatch) => dispatch({type: DELETE_TASK, taskId})
 }
 
