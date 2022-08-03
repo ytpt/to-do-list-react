@@ -20,7 +20,7 @@ const Task = ({task}) => {
     }
 
     return (
-        <li key={task.id} style={{backgroundColor: radio ? '#dfdfdf' : 'transparent'}}>
+        <li key={task.id} style={{backgroundColor: radio && '#dfdfdf'}}>
             <input
                 type={'radio'}
                 value={radio}
